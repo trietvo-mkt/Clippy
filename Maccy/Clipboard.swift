@@ -34,7 +34,7 @@ class Clipboard {
     .safariWebArchve
   ]
 
-  private var enabledTypes: Set<NSPasteboard.PasteboardType> { Defaults[.enabledPasteboardTypes] }
+  private var enabledTypes: Set<NSPasteboard.PasteboardType> { ClippyRules.enabledTypes }
   private var disabledTypes: Set<NSPasteboard.PasteboardType> { supportedTypes.subtracting(enabledTypes) }
 
   private var sourceApp: NSRunningApplication? { NSWorkspace.shared.frontmostApplication }
@@ -112,6 +112,7 @@ class Clipboard {
     pasteboard.setString("", forType: .fromMaccy)
     pasteboard.setString(item.application ?? "", forType: .source)
     sync()
+    CurrentClip.shared.set(item, changeCount: pasteboard.changeCount)
 
     Task {
       Notifier.notify(body: item.title, sound: .knock)
@@ -170,6 +171,9 @@ class Clipboard {
       // Maybe queue it into the paste stack? Configurable behaviour?
       AppState.shared.history.interruptPasteStack()
     }
+
+    if ClippyRules.isSelect(pasteboard) { return }
+    if ClippyRules.shouldIgnore(types: Set(pasteboard.types ?? [])) { CurrentClip.shared.clear(); return }
 
     if Defaults[.ignoreEvents] {
       if Defaults[.ignoreOnlyNextEvent] {

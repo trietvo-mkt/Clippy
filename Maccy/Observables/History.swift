@@ -132,7 +132,7 @@ class History: ItemsContainer { // swiftlint:disable:this type_body_length
     filteredPinnedItems = allPinnedItems
     filteredUnpinnedItems = allUnpinnedItems
 
-    limitHistorySize(to: Defaults[.size])
+    limitHistorySize(to: ClippyRules.historyLimit)
 
     updateShortcuts()
     // Ensure that panel size is proper *after* loading all items.
@@ -167,7 +167,7 @@ class History: ItemsContainer { // swiftlint:disable:this type_body_length
     }
 
     var replacedPinnedItem: HistoryItemDecorator?
-    if let existingHistoryItem = findSimilarItem(item) {
+    if !ClippyRules.keepsDuplicates, let existingHistoryItem = findSimilarItem(item) {
       if isModified(item) == nil {
         transferContents(from: existingHistoryItem, to: item)
       }
@@ -195,7 +195,7 @@ class History: ItemsContainer { // swiftlint:disable:this type_body_length
 
     // Remove exceeding items. Do this after the item is added to avoid removing something
     // if a duplicate was found as then the size already stayed the same.
-    limitHistorySize(to: item.pin == nil ? Defaults[.size] - 1 : Defaults[.size])
+    limitHistorySize(to: item.pin == nil ? ClippyRules.historyLimit - 1 : ClippyRules.historyLimit)
 
     sessionLog[Clipboard.shared.changeCount] = item
 

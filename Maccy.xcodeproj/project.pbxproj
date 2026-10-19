@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C11991E00000000000000002 /* ClippyRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11991E00000000000000001 /* ClippyRules.swift */; };
+		C11991E00000000000000005 /* CurrentClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11991E00000000000000004 /* CurrentClip.swift */; };
 		0ABDD5122BB47F1E0054963B /* NSWorkspace+ApplicationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABDD5112BB47F1E0054963B /* NSWorkspace+ApplicationName.swift */; };
 		21FFF308D9217B43FD4C393F /* VoiceOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21DCA6C3D17E48D33D6E608 /* VoiceOver.swift */; };
 		2F0E055F2FFD2EB300CCD1DE /* ReorderableContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0E055E2FFD2EAF00CCD1DE /* ReorderableContainer.swift */; };
@@ -90,6 +91,7 @@
 		DA243D122C2F64830012A27F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA243D112C2F64820012A27F /* ContentView.swift */; };
 		DA243D142C2F66DD0012A27F /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA243D132C2F66DD0012A27F /* Storage.swift */; };
 		DA360DB31E3DF137005C6F6B /* HistoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA360DB21E3DF137005C6F6B /* HistoryTests.swift */; };
+		C11991E00000000000000007 /* ClippyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11991E00000000000000006 /* ClippyTests.swift */; };
 		DA384E86232746D800603999 /* SearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA384E85232746D800603999 /* SearchTests.swift */; };
 		DA3BCB8E2C3E015000B01BC1 /* ModifierFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3BCB8D2C3E015000B01BC1 /* ModifierFlags.swift */; };
 		DA3BCB922C3EEC3C00B01BC1 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3BCB912C3EEC3C00B01BC1 /* History.swift */; };
@@ -198,6 +200,8 @@
 
 /* Begin PBXFileReference section */
 		C11991E00000000000000001 /* ClippyRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClippyRules.swift; sourceTree = "<group>"; };
+		C11991E00000000000000006 /* ClippyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClippyTests.swift; sourceTree = "<group>"; };
+		C11991E00000000000000004 /* CurrentClip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentClip.swift; sourceTree = "<group>"; };
 		088F4DA628BECBC40003AD19 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0ABDD5112BB47F1E0054963B /* NSWorkspace+ApplicationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWorkspace+ApplicationName.swift"; sourceTree = "<group>"; };
 		11680E44DAF848ADB8BA358E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/PinsSettings.strings; sourceTree = "<group>"; };
@@ -649,6 +653,7 @@
 			isa = PBXGroup;
 			children = (
 				C11991E00000000000000001 /* ClippyRules.swift */,
+				C11991E00000000000000004 /* CurrentClip.swift */,
 			);
 			path = Clippy;
 			sourceTree = "<group>";
@@ -794,6 +799,7 @@
 				FFFC00000000000000000004 /* UnsafeForTitleLayoutTests.swift */,
 				DAE2850123225BD90080E394 /* ColorImageTests.swift */,
 				DA360DB21E3DF137005C6F6B /* HistoryTests.swift */,
+				C11991E00000000000000006 /* ClippyTests.swift */,
 				DA1EDE422045B35300479723 /* HistoryDecoratorTests.swift */,
 				DAFE2DE8268A9B1B00990986 /* HistoryItemTests.swift */,
 				DA384E85232746D800603999 /* SearchTests.swift */,
@@ -1150,6 +1156,7 @@
 				C0FFEE000000000000000003 /* ShortenedTests.swift in Sources */,
 				FFFC00000000000000000003 /* UnsafeForTitleLayoutTests.swift in Sources */,
 				DA360DB31E3DF137005C6F6B /* HistoryTests.swift in Sources */,
+				C11991E00000000000000007 /* ClippyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1204,6 +1211,7 @@
 				2FA81FE02E43D9B700C12F92 /* Dictionary+RemoveItem.swift in Sources */,
 				DAA5ACCA2C1BEE8A00B58513 /* SoftwareUpdater.swift in Sources */,
 				C11991E00000000000000002 /* ClippyRules.swift in Sources */,
+				C11991E00000000000000005 /* CurrentClip.swift in Sources */,
 				2F9B42F12F1A499D006548E5 /* ToolbarView.swift in Sources */,
 				DAA5ACB22C1B3F8800B58513 /* GeneralSettingsPane.swift in Sources */,
 				DA1969122C3F0DD200258481 /* HistoryItemView.swift in Sources */,

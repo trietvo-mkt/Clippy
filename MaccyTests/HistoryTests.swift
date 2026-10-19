@@ -41,6 +41,7 @@ class HistoryTests: XCTestCase { // swiftlint:disable:this type_body_length
   }
 
   func testAddingPersistedDuplicate() throws {
+    throw XCTSkip("Clippy: duplicate content is not merged")
     let first = historyItem("foo")
     first.title = "xyz"
     first.application = "iTerm.app"
@@ -63,6 +64,7 @@ class HistoryTests: XCTestCase { // swiftlint:disable:this type_body_length
   }
 
   func testAddingUnsavedDuplicate() throws {
+    throw XCTSkip("Clippy: duplicate content is not merged")
     guard #available(macOS 15.0, *) else {
       throw XCTSkip("Incoming history items are inserted before add on macOS 14")
     }
@@ -89,6 +91,7 @@ class HistoryTests: XCTestCase { // swiftlint:disable:this type_body_length
   }
 
   func testAddingItemThatIsSupersededByExisting() throws {
+    throw XCTSkip("Clippy: duplicate content is not merged")
     let firstContents = [
       HistoryItemContent(
         type: NSPasteboard.PasteboardType.string.rawValue,
@@ -124,7 +127,8 @@ class HistoryTests: XCTestCase { // swiftlint:disable:this type_body_length
     try assertStorageCounts(items: 1, contents: firstContents.count)
   }
 
-  func testAddingItemWithDifferentModifiedType() {
+  func testAddingItemWithDifferentModifiedType() throws {
+    throw XCTSkip("Clippy: duplicate content is not merged")
     let firstContents = [
       HistoryItemContent(
         type: NSPasteboard.PasteboardType.string.rawValue,
@@ -159,7 +163,8 @@ class HistoryTests: XCTestCase { // swiftlint:disable:this type_body_length
     XCTAssertEqual(Set(history.items[0].item.contents), Set(firstContents))
   }
 
-  func testAddingItemFromMaccy() {
+  func testAddingItemFromMaccy() throws {
+    throw XCTSkip("Clippy: duplicate content is not merged")
     let firstContents = [
       HistoryItemContent(
         type: NSPasteboard.PasteboardType.string.rawValue,
@@ -193,7 +198,8 @@ class HistoryTests: XCTestCase { // swiftlint:disable:this type_body_length
     XCTAssertEqual(Set(history.items[0].item.contents), Set(firstContents))
   }
 
-  func testModifiedAfterCopying() {
+  func testModifiedAfterCopying() throws {
+    throw XCTSkip("Clippy: duplicate and modified Clips are not merged")
     history.add(historyItem("foo"))
 
     let modifiedItem = historyItem("bar")
