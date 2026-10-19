@@ -54,6 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     Clipboard.shared.onNewCopy { History.shared.add($0) }
     Clipboard.shared.onNewCopy { CurrentClip.shared.set($0, changeCount: Clipboard.shared.changeCount) }
     Clipboard.shared.start()
+    ClippyPanelController.shared.start()
 
     Task {
       for await _ in Defaults.updates(.clipboardCheckInterval, initial: false) {
