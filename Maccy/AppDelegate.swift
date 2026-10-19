@@ -191,16 +191,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       .intersection(.deviceIndependentFlagsMask)
 
     if modifierFlags.contains(.option) {
-      Defaults[.ignoreEvents].toggle()
-
-      if modifierFlags.contains(.shift) {
-        Defaults[.ignoreOnlyNextEvent] = Defaults[.ignoreEvents]
-      }
-
+      panel.toggle(height: AppState.shared.popup.height, at: .statusItem)
       return
     }
 
-    panel.toggle(height: AppState.shared.popup.height, at: .statusItem)
+    ClippyPanelController.shared.toggle()
   }
 
   private func synchronizeMenuIconText() {

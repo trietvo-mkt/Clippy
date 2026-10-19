@@ -1,5 +1,6 @@
 import AppKit
 import Defaults
+import KeyboardShortcuts
 import Observation
 import SwiftUI
 
@@ -111,6 +112,7 @@ final class ClippyPanelController {
     panel.setFrame(ClippyPanelLayout.frame(topRight: resolveTopRight(saved: saved), size: size), display: true)
 
     observe()
+    KeyboardShortcuts.onKeyDown(for: .togglePanel) { [weak self] in self?.toggle() }
 
     if Defaults[.panelVisible] {
       panel.orderFrontRegardless()
