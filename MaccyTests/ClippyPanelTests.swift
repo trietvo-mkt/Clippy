@@ -39,4 +39,8 @@ class ClippyPanelTests: XCTestCase {
   func testCollapsedSizeScalesWithIconScale() {
     XCTAssertEqual(ClippyPanelLayout.collapsedSize(iconScale: 1.5), NSSize(width: 66, height: 66))
   }
+
+  func testExpandedSizeScalesWithSizeScale() {
+    XCTAssertEqual(ClippyPanelLayout.expandedSize(scale: 1.5), NSSize(width: 450, height: 510))
+  }
 }

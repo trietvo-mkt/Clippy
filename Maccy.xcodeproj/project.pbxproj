@@ -12,6 +12,7 @@
 		C11991E00000000000000009 /* Clippy+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11991E00000000000000008 /* Clippy+Defaults.swift */; };
 		C11991E0000000000000000B /* ClippyPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11991E0000000000000000A /* ClippyPanel.swift */; };
 		C11991E0000000000000000D /* ClippyPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11991E0000000000000000C /* ClippyPanelView.swift */; };
+		C11991E00000000000000011 /* PanelSettingsPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11991E00000000000000010 /* PanelSettingsPane.swift */; };
 		0ABDD5122BB47F1E0054963B /* NSWorkspace+ApplicationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABDD5112BB47F1E0054963B /* NSWorkspace+ApplicationName.swift */; };
 		21FFF308D9217B43FD4C393F /* VoiceOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21DCA6C3D17E48D33D6E608 /* VoiceOver.swift */; };
 		2F0E055F2FFD2EB300CCD1DE /* ReorderableContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0E055E2FFD2EAF00CCD1DE /* ReorderableContainer.swift */; };
@@ -207,6 +208,7 @@
 		C11991E0000000000000000A /* ClippyPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClippyPanel.swift; sourceTree = "<group>"; };
 		C11991E0000000000000000E /* ClippyPanelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClippyPanelTests.swift; sourceTree = "<group>"; };
 		C11991E0000000000000000C /* ClippyPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClippyPanelView.swift; sourceTree = "<group>"; };
+		C11991E00000000000000010 /* PanelSettingsPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelSettingsPane.swift; sourceTree = "<group>"; };
 		C11991E00000000000000001 /* ClippyRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClippyRules.swift; sourceTree = "<group>"; };
 		C11991E00000000000000006 /* ClippyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClippyTests.swift; sourceTree = "<group>"; };
 		C11991E00000000000000004 /* CurrentClip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentClip.swift; sourceTree = "<group>"; };
@@ -663,6 +665,7 @@
 				C11991E00000000000000008 /* Clippy+Defaults.swift */,
 				C11991E0000000000000000A /* ClippyPanel.swift */,
 				C11991E0000000000000000C /* ClippyPanelView.swift */,
+				C11991E00000000000000010 /* PanelSettingsPane.swift */,
 				C11991E00000000000000001 /* ClippyRules.swift */,
 				C11991E00000000000000004 /* CurrentClip.swift */,
 			);
@@ -1226,6 +1229,7 @@
 				C11991E00000000000000009 /* Clippy+Defaults.swift in Sources */,
 				C11991E0000000000000000B /* ClippyPanel.swift in Sources */,
 				C11991E0000000000000000D /* ClippyPanelView.swift in Sources */,
+				C11991E00000000000000011 /* PanelSettingsPane.swift in Sources */,
 				C11991E00000000000000002 /* ClippyRules.swift in Sources */,
 				C11991E00000000000000005 /* CurrentClip.swift in Sources */,
 				2F9B42F12F1A499D006548E5 /* ToolbarView.swift in Sources */,

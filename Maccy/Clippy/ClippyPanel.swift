@@ -39,6 +39,10 @@ enum ClippyPanelLayout {
   static let expandedSize = NSSize(width: 300, height: 340)
   static let collapsedBaseSize: CGFloat = 44
 
+  static func expandedSize(scale: Double) -> NSSize {
+    NSSize(width: expandedSize.width * scale, height: expandedSize.height * scale)
+  }
+
   static func collapsedSize(iconScale: Double) -> NSSize {
     let side = collapsedBaseSize * iconScale
     return NSSize(width: side, height: side)
@@ -76,11 +80,12 @@ final class ClippyPanelController {
   private var background: NSVisualEffectView?
   private var observers: [NSObjectProtocol] = []
   private var iconScaleTask: Task<Void, Never>?
+  private var sizeScaleTask: Task<Void, Never>?
 
   private var size: NSSize {
     model.collapsed
       ? ClippyPanelLayout.collapsedSize(iconScale: Defaults[.panelIconScale])
-      : ClippyPanelLayout.expandedSize
+      : ClippyPanelLayout.expandedSize(scale: Defaults[.panelSizeScale])
   }
 
   func start() {
@@ -179,6 +184,13 @@ final class ClippyPanelController {
     iconScaleTask = Task { [weak self] in
       for await _ in Defaults.updates(.panelIconScale, initial: false) {
         guard let self, self.model.collapsed else { continue }
+        self.applySizeKeepingTopRight()
+      }
+    }
+
+    sizeScaleTask = Task { [weak self] in
+      for await _ in Defaults.updates(.panelSizeScale, initial: false) {
+        guard let self, !self.model.collapsed else { continue }
         self.applySizeKeepingTopRight()
       }
     }

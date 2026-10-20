@@ -12,6 +12,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     statusItem.behavior = .removalAllowed
     statusItem.button?.action = #selector(performStatusItemClick)
+    statusItem.button?.sendAction(on: [.leftMouseUp, .rightMouseUp])
     statusItem.button?.image = Defaults[.menuIcon].image
     statusItem.button?.imagePosition = .imageLeft
     statusItem.button?.target = self
@@ -186,6 +187,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @objc
   private func performStatusItemClick() {
+    if NSApp.currentEvent?.type == .rightMouseUp {
+      AppState.shared.openPreferences()
+      return
+    }
+
     let modifierFlags = (NSApp.currentEvent?.modifierFlags ?? [])
       .union(NSEvent.modifierFlags)
       .intersection(.deviceIndependentFlagsMask)
