@@ -94,6 +94,8 @@ private struct ClippyPanelListView: View {
       RoundedRectangle(cornerRadius: 6)
         .fill(isCurrent ? Color.accentColor : Color.primary.opacity(0.05))
     )
+    // Short fade so the highlight glides from the old row to the new one.
+    .animation(.easeOut(duration: 0.15), value: isCurrent)
     .contentShape(Rectangle())
     .onTapGesture {
       Clipboard.shared.copy(clip.item)
