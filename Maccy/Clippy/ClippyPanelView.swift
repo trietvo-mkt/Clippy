@@ -95,6 +95,10 @@ private struct ClippyPanelListView: View {
         .fill(isCurrent ? Color.accentColor : Color.primary.opacity(0.05))
     )
     .contentShape(Rectangle())
-    .onTapGesture { Clipboard.shared.copy(clip.item) }
+    .onTapGesture {
+      Clipboard.shared.copy(clip.item)
+      // Read the new changeCount now so the highlight moves without waiting for the timer.
+      changeCount = NSPasteboard.general.changeCount
+    }
   }
 }
