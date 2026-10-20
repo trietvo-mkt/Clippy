@@ -77,10 +77,12 @@ final class ClippyPanelController {
   private static let collapsedCornerRadius: CGFloat = 10
 
   private var panel: ClippyPanel?
+  private var container: NSView?
   private var background: NSVisualEffectView?
   private var observers: [NSObjectProtocol] = []
   private var iconScaleTask: Task<Void, Never>?
   private var sizeScaleTask: Task<Void, Never>?
+  private var opacityTask: Task<Void, Never>?
 
   private var size: NSSize {
     model.collapsed
@@ -94,6 +96,12 @@ final class ClippyPanelController {
     model.collapsed = Defaults[.panelCollapsed]
     let panel = ClippyPanel(contentRect: NSRect(origin: .zero, size: size))
 
+    // The container rounds the corners. The glass and the list are siblings so the opacity setting
+    // fades only the glass, not the list text.
+    let container = NSView()
+    container.wantsLayer = true
+    container.layer?.masksToBounds = true
+
     // Frosted glass. state = .active is required because Clippy is never the active app.
     let background = NSVisualEffectView()
     background.material = .hudWindow
@@ -101,15 +109,20 @@ final class ClippyPanelController {
     background.state = .active
     background.wantsLayer = true
     background.layer?.masksToBounds = true
+    background.alphaValue = Defaults[.panelBackgroundOpacity]
+    background.frame = container.bounds
+    background.autoresizingMask = [.width, .height]
+    container.addSubview(background)
 
     let hosting = ClippyPanelHostingView(rootView: ClippyPanelView(model: model))
     hosting.sizingOptions = []
-    hosting.frame = background.bounds
+    hosting.frame = container.bounds
     hosting.autoresizingMask = [.width, .height]
-    background.addSubview(hosting)
+    container.addSubview(hosting, positioned: .above, relativeTo: background)
 
-    panel.contentView = background
+    panel.contentView = container
     self.panel = panel
+    self.container = container
     self.background = background
     updateCornerRadius()
 
@@ -153,7 +166,7 @@ final class ClippyPanelController {
   }
 
   private func updateCornerRadius() {
-    background?.layer?.cornerRadius = model.collapsed
+    container?.layer?.cornerRadius = model.collapsed
       ? Self.collapsedCornerRadius
       : Self.expandedCornerRadius
   }
@@ -192,6 +205,12 @@ final class ClippyPanelController {
       for await _ in Defaults.updates(.panelSizeScale, initial: false) {
         guard let self, !self.model.collapsed else { continue }
         self.applySizeKeepingTopRight()
+      }
+    }
+
+    opacityTask = Task { [weak self] in
+      for await value in Defaults.updates(.panelBackgroundOpacity, initial: false) {
+        self?.background?.alphaValue = value
       }
     }
   }

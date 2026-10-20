@@ -21,6 +21,7 @@ struct PanelSettingsPane: View {
   @Default(.panelIconScale) private var iconScale
   @Default(.panelFontScale) private var fontScale
   @Default(.panelSizeScale) private var sizeScale
+  @Default(.panelBackgroundOpacity) private var backgroundOpacity
 
   var body: some View {
     Settings.Container(contentWidth: 450) {
@@ -59,6 +60,18 @@ struct PanelSettingsPane: View {
             .frame(width: 200)
             .accessibilityLabel(Text("Panel size"))
           Text("\(Int((sizeScale * 100).rounded()))%")
+            .monospacedDigit()
+            .fixedSize()
+            .frame(minWidth: 40, alignment: .trailing)
+        }
+      }
+
+      Settings.Section(label: { Text("Background opacity") }) {
+        HStack {
+          Slider(value: $backgroundOpacity, in: 0.2...1.0, step: 0.1)
+            .frame(width: 200)
+            .accessibilityLabel(Text("Background opacity"))
+          Text("\(Int((backgroundOpacity * 100).rounded()))%")
             .monospacedDigit()
             .fixedSize()
             .frame(minWidth: 40, alignment: .trailing)

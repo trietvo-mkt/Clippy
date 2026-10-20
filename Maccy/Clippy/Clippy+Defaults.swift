@@ -9,6 +9,7 @@ nonisolated extension Defaults.Keys {
   static let panelFontScale = Key<Double>("panelFontScale", default: 1.0)
   static let panelIconScale = Key<Double>("panelIconScale", default: 1.0)
   static let panelSizeScale = Key<Double>("panelSizeScale", default: 1.0)
+  static let panelBackgroundOpacity = Key<Double>("panelBackgroundOpacity", default: 1.0)
 }
 
 extension KeyboardShortcuts.Name {
