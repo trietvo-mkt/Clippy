@@ -65,31 +65,33 @@ struct StorageSettingsPane: View {
   private let sizeFormatter: NumberFormatter = {
     let formatter = NumberFormatter()
     formatter.minimum = 1
-    formatter.maximum = 999
+    formatter.maximum = ClippyRules.maxHistoryLimit as NSNumber
     return formatter
   }()
 
   var body: some View {
     Settings.Container(contentWidth: 450) {
-      Settings.Section(
-        bottomDivider: true,
-        label: { Text("Save", tableName: "StorageSettings") }
-      ) {
-        Toggle(
-          isOn: $viewModel.saveFiles,
-          label: { Text("Files", tableName: "StorageSettings") }
-        )
-        Toggle(
-          isOn: $viewModel.saveImages,
-          label: { Text("Images", tableName: "StorageSettings") }
-        )
-        Toggle(
-          isOn: $viewModel.saveText,
-          label: { Text("Text", tableName: "StorageSettings") }
-        )
-        Text("SaveDescription", tableName: "StorageSettings")
-          .controlSize(.small)
-          .foregroundStyle(.gray)
+      if ClippyRules.showsStorageTypeAndSort {
+        Settings.Section(
+          bottomDivider: true,
+          label: { Text("Save", tableName: "StorageSettings") }
+        ) {
+          Toggle(
+            isOn: $viewModel.saveFiles,
+            label: { Text("Files", tableName: "StorageSettings") }
+          )
+          Toggle(
+            isOn: $viewModel.saveImages,
+            label: { Text("Images", tableName: "StorageSettings") }
+          )
+          Toggle(
+            isOn: $viewModel.saveText,
+            label: { Text("Text", tableName: "StorageSettings") }
+          )
+          Text("SaveDescription", tableName: "StorageSettings")
+            .controlSize(.small)
+            .foregroundStyle(.gray)
+        }
       }
 
       Settings.Section(label: { Text("Size", tableName: "StorageSettings") }) {
@@ -98,7 +100,7 @@ struct StorageSettingsPane: View {
             .frame(width: 80)
             .help(Text("SizeTooltip", tableName: "StorageSettings"))
             .accessibilityLabel(Text("Size", tableName: "StorageSettings"))
-          Stepper("", value: $size, in: 1...999)
+          Stepper("", value: $size, in: 1...ClippyRules.maxHistoryLimit)
             .labelsHidden()
             .accessibilityLabel(Text("Size", tableName: "StorageSettings"))
           Text(storageSize)
@@ -111,16 +113,18 @@ struct StorageSettingsPane: View {
         }
       }
 
-      Settings.Section(label: { Text("SortBy", tableName: "StorageSettings") }) {
-        Picker("", selection: $sortBy) {
-          ForEach(Sorter.By.allCases) { mode in
-            Text(mode.description)
+      if ClippyRules.showsStorageTypeAndSort {
+        Settings.Section(label: { Text("SortBy", tableName: "StorageSettings") }) {
+          Picker("", selection: $sortBy) {
+            ForEach(Sorter.By.allCases) { mode in
+              Text(mode.description)
+            }
           }
+          .labelsHidden()
+          .frame(width: 160, alignment: .leading)
+          .help(Text("SortByTooltip", tableName: "StorageSettings"))
+          .accessibilityLabel(Text("SortBy", tableName: "StorageSettings"))
         }
-        .labelsHidden()
-        .frame(width: 160, alignment: .leading)
-        .help(Text("SortByTooltip", tableName: "StorageSettings"))
-        .accessibilityLabel(Text("SortBy", tableName: "StorageSettings"))
       }
     }
   }

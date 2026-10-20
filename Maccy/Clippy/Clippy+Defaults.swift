@@ -8,6 +8,7 @@ nonisolated extension Defaults.Keys {
   static let panelCollapsed = Key<Bool>("panelCollapsed", default: false)
   static let panelFontScale = Key<Double>("panelFontScale", default: 1.0)
   static let panelIconScale = Key<Double>("panelIconScale", default: 1.0)
+  static let panelSizeScale = Key<Double>("panelSizeScale", default: 1.0)
 }
 
 extension KeyboardShortcuts.Name {

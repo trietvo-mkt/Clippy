@@ -14,6 +14,12 @@ enum ClippyRules {
 
   static let maxHistoryLimit = 50
 
+  // Clippy stores plain text only and the Panel sorts by last Copy.
+  static let showsStorageTypeAndSort = false
+
+  static let panelScaleRange: ClosedRange<Double> = 0.8...2.0
+  static let panelScaleStep = 0.1
+
   static var historyLimit: Int { min(max(Defaults[.size], 1), maxHistoryLimit) }
 
   // A Copy that has a file URL (for example a Finder copy) makes no Clip.
