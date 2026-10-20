@@ -187,16 +187,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @objc
   private func performStatusItemClick() {
-    if NSApp.currentEvent?.type == .rightMouseUp {
-      AppState.shared.openPreferences()
-      return
-    }
-
     let modifierFlags = (NSApp.currentEvent?.modifierFlags ?? [])
       .union(NSEvent.modifierFlags)
       .intersection(.deviceIndependentFlagsMask)
 
-    if modifierFlags.contains(.option) {
+    if modifierFlags.contains(.option) || NSApp.currentEvent?.type == .rightMouseUp {
       panel.toggle(height: AppState.shared.popup.height, at: .statusItem)
       return
     }

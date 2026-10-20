@@ -26,6 +26,20 @@ final class ClippyPanel: NSPanel {
     hasShadow = true
     isMovableByWindowBackground = true
   }
+
+  // Collapsed, the whole square is the button: a click expands the Panel, a drag moves it.
+  // Handled here because SwiftUI only receives clicks on the icon's own pixels.
+  override func sendEvent(_ event: NSEvent) {
+    guard event.type == .leftMouseDown, ClippyPanelController.shared.model.collapsed else {
+      super.sendEvent(event)
+      return
+    }
+    let origin = frame.origin
+    performDrag(with: event)
+    if frame.origin == origin {
+      ClippyPanelController.shared.setCollapsed(false)
+    }
+  }
 }
 
 // Without acceptsFirstMouse, the first click on a non-key window never reaches SwiftUI.
